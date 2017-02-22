@@ -44,7 +44,7 @@ class NotifyAction implements ApiAwareInterface, ActionInterface
         $details['_status_code'] = $response->getCode();
         $details['_status_message'] = $response->isSuccessful() ? '' : $response->getMessage();
 
-        throw new HttpResponse('OK', 200);
+        $response->confirm($response->getRedirectUrl());
     }
 
     /**

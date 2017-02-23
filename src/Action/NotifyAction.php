@@ -44,7 +44,9 @@ class NotifyAction implements ApiAwareInterface, ActionInterface
         $details['_status_code'] = $response->getCode();
         $details['_status_message'] = $response->isSuccessful() ? '' : $response->getMessage();
 
-        $response->confirm(getenv('REDIRECT_URL'));
+        $httpHost = $_SERVER['HTTP_HOST'];
+        $httpPrefix = (substr($httpHost, -strlen('com')) === 'com') ? 'https' : 'http';
+        $response->confirm($httpPrefix.'://'.$httpHost.'/thankyou');
     }
 
     /**
